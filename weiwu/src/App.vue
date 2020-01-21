@@ -8,11 +8,16 @@
     <div class="footer">
       <div
         class="icon"
+        :class="item.path===$router.history.current.fullPath?'act':''"
         v-for="(item) in tabs"
         :key="item.name"
         @click="changeTabs(item.path)"
       >
-        <van-icon :name="item.icon" color="#fff" size="0.533333rem" />
+        <van-icon
+          :name="item.icon"
+          color="#fff"
+          :size="item.path===$router.history.current.fullPath?'0.613333rem':'0.48rem'"
+        />
       </div>
     </div>
   </div>
@@ -33,7 +38,7 @@ export default {
         {
           name: "个人中心",
           icon: "manager",
-          isclick: true,
+          isclick: false,
           path: "/mine"
         }
       ]
@@ -41,13 +46,8 @@ export default {
   },
   methods: {
     changeTabs(path) {
-      window.console.log(this.$router);
-
       this.$router.push(path);
     }
-  },
-  components: {
-    // Home,Mine
   }
 };
 </script>
@@ -68,9 +68,10 @@ body,
   overflow-y: auto;
 }
 .footer {
-  height: 1.786667rem;
+  height: 2.32rem;
   display: flex;
   justify-content: center;
+  line-height: 2.32rem;
 }
 .footer .icon {
   height: 0.96rem;
@@ -79,8 +80,14 @@ body,
   line-height: 1.2rem;
   background-color: #69b076;
   border-radius: 50% 50%;
+  align-self: center;
 }
 .icon:nth-child(1) {
   margin-right: 0.853333rem;
+}
+.footer .act {
+  width: 1.2rem;
+  height: 1.2rem;
+  line-height: 1.5rem;
 }
 </style>
